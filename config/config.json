@@ -7,20 +7,13 @@
     "dialect": "postgres",
     "operatorsAliases": false
   },
-  "test": {
-    "username": "macler01",
-    "password": "chizas",
-    "database": "films",
-    "host": "localhost",
-    "dialect": "postgres",
-    "operatorsAliases": false
-  },
   "production": {
     "username": "macler01",
     "password": "chizas",
     "database": "films",
     "host": "localhost",
     "dialect": "postgres",
-    "operatorsAliases": false
+    "operatorsAliases": false,
+    "use_env_variable": "DATABASE_URL"
   }
 }
