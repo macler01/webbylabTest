@@ -1,20 +1,24 @@
-const router = require('express').Router;
-const db = require('./models/index.js');
+const router = require('express').Router();
+const db = require('../models/index.js');
 
 router.post(`/`, async (req,res,next) => {
     let params = req.body;
-    let dbResponse = await db.Films.findOrCreate(
+    await db.Films.findOrCreate(
         {where: {
             name: params.name,
             year: params.year,
-            format:
+            format: params.format
         }
     });
-    console.log(dbResponse);
-
-    
+    return res.status(200).json({
+        success : true,
+        err: null,
+    });
 });
 
-router.get(`/`, async () => {
+router.get(`/all`, async (req,res,next) => {
+    let films = await db.Films.findAll();
+    return res.status(200).json(films);
+});
 
-})
+module.exports = router;
