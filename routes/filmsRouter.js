@@ -4,12 +4,11 @@ const db = require('../models/index.js');
 //Добавить фильм
 router.post(`/`, async (req,res,next) => {
     let params = req.body;
-    console.log()
     await db.Films.findOrCreate(
         {where: {
             name: params.name.replace(/ +?/g, '').toLowerCase(),
             year: params.year,
-            format: params.format
+            format: params.format.replace(/ +?/g, '').toLowerCase()
         }
     });
     return res.status(200).json({
@@ -32,7 +31,7 @@ router.delete(`/id/:id`, async (req,res,next) => {
 // Получить фильм по фильтру
 router.get(`/filter/:filter/:value`,async (req,res,next) => {
     let filter = req.params.filter;
-    let value = req.params.value;
+    let value = req.params.value.replace(/ +?/g, '').toLowerCase();
     let where = {};
     where[filter] = value;
     console.log(where);
@@ -44,7 +43,6 @@ router.get(`/filter/:filter/:value`,async (req,res,next) => {
 
 // Получить список всех фильмов + сортировка
 router.get(`/all`, async (req,res,next) => {
-    console.log(req.query.sort)
     let order = typeof req.query.sort === undefined ? "createdAt" : "name";
     let orderBy = [order ,'DESC'];
     let films = await db.Films.findAll({order: [orderBy]});
