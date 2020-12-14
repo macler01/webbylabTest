@@ -4,9 +4,10 @@ const db = require('../models/index.js');
 //Добавить фильм
 router.post(`/`, async (req,res,next) => {
     let params = req.body;
+    console.log()
     await db.Films.findOrCreate(
         {where: {
-            name: params.name.trim().toLowerCase(),
+            name: params.name.replace(/ +?/g, '').toLowerCase(),
             year: params.year,
             format: params.format
         }
