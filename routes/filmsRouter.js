@@ -19,7 +19,7 @@ router.post(`/`, async (req,res,next) => {
 
 // Удалить фильм
 router.delete(`/id/:id`, async (req,res,next) => {
-    let id = params.id;
+    let id = req.params.id;
     await db.Films.destroy({
         where: {
           id: id
