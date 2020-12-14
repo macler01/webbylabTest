@@ -44,7 +44,7 @@ router.get(`/filter/:filter/:value`,async (req,res,next) => {
 // Получить список всех фильмов + сортировка
 router.get(`/all`, async (req,res,next) => {
     let order = typeof req.query.sort === undefined ? "createdAt" : "name";
-    let orderBy = [order ,'DESC'];
+    let orderBy = [order ,'ASC'];
     let films = await db.Films.findAll({order: [orderBy]});
     films = films.map (item => {
         return item.dataValues;
