@@ -1,7 +1,9 @@
 const router = require('express').Router();
 const db = require('../models/index.js');
 
+//Добавить фильм
 router.post(`/`, async (req,res,next) => {
+    console.log(req);
     let params = req.body;
     await db.Films.findOrCreate(
         {where: {
@@ -16,22 +18,7 @@ router.post(`/`, async (req,res,next) => {
     });
 });
 
-router.get(`/all`, async (req,res,next) => {
-    let films = await db.Films.findAll();
-    return res.status(200).json(films);
-});
-
-router.get(`/filter/:filter/:value`,async (req,res,next) => {
-    let filter = req.params.filter;
-    let value = req.params.value;
-    let where = {};
-    where[filter] = value;
-    let film = await db.Films.findAll({
-        where: where
-      });
-    return res.status(200).json(film);  
-})
-
+// Удалить фильм
 router.delete(`/id/:id`, async (req,res,next) => {
     let id = params.id;
     await db.Films.destroy({
@@ -41,5 +28,32 @@ router.delete(`/id/:id`, async (req,res,next) => {
     });
     return res.status(200).send(`OK`);
 });
+
+// Получить фильм по фильтру
+router.get(`/filter/:filter/:value`,async (req,res,next) => {
+    let filter = req.params.filter;
+    let value = req.params.value;
+    let where = {};
+    where[filter] = value;
+    console.log(where);
+    let film = await db.Films.findAll({
+        where: where
+      });
+    return res.status(200).json(film);  
+});
+
+// Получить список всех фильмов + сортировка
+router.get(`/all`, async (req,res,next) => {
+    console.log(req.query.sort)
+    let order = typeof req.query.sort === undefined ? "createdAt" : "name";
+    let orderBy = [order ,'DESC'];
+    let films = await db.Films.findAll({order: [orderBy]});
+    films = films.map (item => {
+        return item.dataValues;
+    })
+    return res.render('index', {films})
+});
+
+
 
 module.exports = router;

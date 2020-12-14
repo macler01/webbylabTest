@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
   Films.init({
     name: DataTypes.STRING,
     year: DataTypes.INTEGER,
-    format: DataTypes.STRING
+    format: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Films',
