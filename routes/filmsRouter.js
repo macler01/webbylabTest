@@ -3,7 +3,6 @@ const db = require('../models/index.js');
 
 //Добавить фильм
 router.post(`/`, async (req,res,next) => {
-    console.log(req);
     let params = req.body;
     await db.Films.findOrCreate(
         {where: {
@@ -51,7 +50,7 @@ router.get(`/all`, async (req,res,next) => {
     films = films.map (item => {
         return item.dataValues;
     })
-    return res.render('index', {films})
+    return res.status(200).json(films);
 });
 
 
