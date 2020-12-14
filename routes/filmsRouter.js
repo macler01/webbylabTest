@@ -6,7 +6,7 @@ router.post(`/`, async (req,res,next) => {
     let params = req.body;
     await db.Films.findOrCreate(
         {where: {
-            name: params.name,
+            name: params.name.trim().toLowerCase(),
             year: params.year,
             format: params.format
         }
