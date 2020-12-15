@@ -1,19 +1,23 @@
 {
   "development": {
-    "username": "macler01",
-    "password": "chizas",
-    "database": "films",
+    "username": "postgres",
+    "password": "chiza123",
+    "database": "postgres",
     "host": "localhost",
-    "dialect": "postgres",
-    "operatorsAliases": false
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "postgres",
+    "password": "chiza123",
+    "database": "postgres",
+    "host": "localhost",
+    "dialect": "postgres"
   },
   "production": {
-    "username": "macler01",
-    "password": "chizas",
-    "database": "films",
+    "username": "postgres",
+    "password": "chiza123",
+    "database": "postgres",
     "host": "localhost",
-    "dialect": "postgres",
-    "operatorsAliases": false,
-    "use_env_variable": "DATABASE_URL"
+    "dialect": "postgres"
   }
 }
