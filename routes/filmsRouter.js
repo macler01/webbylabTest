@@ -3,7 +3,6 @@ const db = require('../models/index.js');
 const schemas = require('../schemas');
 const multer  = require('multer')
 const upload = multer({ dest: './temp' })
-const fs = require('fs-extra');
 const reader = require('../reader');
 const { Op } = require("sequelize");
 
