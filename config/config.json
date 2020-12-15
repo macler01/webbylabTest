@@ -18,6 +18,7 @@
     "password": "chiza123",
     "database": "postgres",
     "host": "localhost",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "use_env_variable": "DATABASE_URL"
   }
 }
